@@ -6,6 +6,7 @@ const all = {
 window.onload = async () => {
     await getData();
     await exportData();
+    viewSalary();
 };
 
 const getData = async () => {
@@ -18,10 +19,42 @@ const exportData = () => {
     let ulE = document.getElementById("ulE");
     for (let i = 0; i < all.array.length; i++) {
         let eachInfo = all.array[i];
-        let name = eachInfo.employee_name
-        all.name = name;
+        let nameEp = eachInfo.employee_name
+        all.name = nameEp;
         ulE.innerHTML += `
-        <li>${name}<li>
+        <li id="${i}">${nameEp}<li>
         `
     };
+};
+
+const viewSalary = () => {
+    for (let i = 0; i<all.array.length; i++){
+        let list = document.getElementById(`employee_name[${i}]`);
+        let salaryInfo = document.getElementById("employee_salary");
+        list.addEventListener('click', () => {
+            console.log(`employee_salary[${i}]`)
+            salaryInfo.innerHTML = '';
+            let eachUser = all.array[i];
+            salaryInfo.innerHTML += `<a>Salary</a>: ${eachUser.employee_salary}`
+        });
+    };
+};
+
+
+
+
+const postMethod = () => {
+
+    let name = document.getElementById("employee_name");
+    let salary = document.getElementById("employee_salary");
+    let age = document.getElementById("employee_age");
+    let image = document.getElementById("profile_image");
+
+    let post = document.getElementById("button");
+    post.addEventListener("click", () => {
+        console.log(name.value);
+        console.log(salary.value);
+        console.log(age.value);
+        console.log(image.value);
+    })
 };
